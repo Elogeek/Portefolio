@@ -1,0 +1,80 @@
+/** General style */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    width: 100%;
+    display: flex;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 40px 0;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+}
+
+header a {
+    transition:0.3s;
+}
+
+header .home {
+    font-size: 2.4rem;
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 1000;
+    text-decoration: none;
+}
+
+header .icons {
+    position: relative;
+    display: flex;
+}
+
+header .iconMenu {
+    position: relative;
+    width: 50px;
+    height: 22px;
+    cursor: pointer;
+}
+
+header nav {
+    background: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    transform: translate3d(0, -100%, 0);
+    z-index: -100;
+}
+
+ nav .menu-list {
+     display: flex;
+     align-items: center;
+     flex-direction: row;
+     overflow: hidden;
+     margin: 0;
+     padding: 0;
+     border: 0;
+     font-size: 100%;
+}
+
+
