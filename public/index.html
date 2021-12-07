@@ -3,21 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Portfolio Elogeek</title>
+    <script src="https://kit.fontawesome.com/e3ddf954eb.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/assets/css/menu.css">
 </head>
 <body>
 
-<header>
-    <a href="index.html" class="home">Elogeek</a>
-    <div class="icons">
-        <box-icon name='menu' class="iconMenu" id="openMenu" ></box-icon>
-        <box-icon name='x-circle' class="iconMenu" id="closedMenu"></box-icon>
-    </div>
-    <nav></nav>
-</header>
+    <!-- Design (background) of the site-->
+    <canvas id="background"></canvas>
+
+    <header>
+        <a href="index.html" class="home">Elogeek</a>
+        <div id="container">
+            <div id="top">
+                <div class="icons">
+                   <div class="iconMenu" id="menu"><i class="fas fa-bars"></i></div>
+                    <div class="iconMenu" id="exitMenu"><i class="fas fa-times-circle"></i></div>
+                </div>
+            </div>
+
+            <div class="menu">
+                <ul class="menu-list">
+                    <div><li><a href="">Home</a></li></div>
+                    <div><li> <a href="">Works</a></li></div>
+                    <div><li> <a href="">About me</a></li></div>
+                    <div><li> <a href="">Contact</a></li></div>
+                </ul>
+            </div>
+
+
+        </div>
+    </header>
+
 
     <div class="container"></div>
-    <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
     <script src="/assets/js/menu.js"></script>
+    <script src="/assets/js/composants/background.js"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
+/*
 const Menu = function(liens) {
+
     this.parent = document.querySelector('nav');
     this.liens = liens;
 
@@ -24,12 +26,12 @@ const Menu = function(liens) {
 
 }
 
-/**
+
  * A single link HtmlElement.
  * @param lien
  * @param titre
  * @constructor
- */
+
 const Link = function(lien, titre) {
     this.lien = lien;
     this.titre = titre;
@@ -45,21 +47,21 @@ const Link = function(lien, titre) {
         return this.aHtmlElement;
     }
 }
+// Menu parent element.
+const myMenu = document.querySelector('nav');
+const linksMenu = [
+    new Link("#", "Home"),
+    new Link("#", "Works"),
+    new Link("#", "About me"),
+    new Link("#", "Contact")
+];
+*/
 
-let iconMenu = document.querySelector("#openMenu");
-iconMenu.addEventListener("click", ev => {
-    iconMenu.style.display ="none";
-    // Menu parent element.
-    const myMenu = document.querySelector('nav');
-    const linksMenu = [
-        new Link("#", "Home"),
-        new Link("#", "Works"),
-        new Link("#", "About me"),
-        new Link("#", "Contact")
-    ];
 
-    const a = new Menu(myMenu,linksMenu);
-    a.build();
-    a.attachClickEvent();
+document.getElementById("menu").addEventListener("click", ()=>{
+    document.getElementById("container").style.top = "0";
+});
 
-})
+document.getElementById("exitMenu").addEventListener("click", ()=>{
+    document.getElementById("container").style.top = "-105vh";
+});
