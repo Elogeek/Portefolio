@@ -1,73 +1,63 @@
 window.addEventListener("load", function() {
     const ctx = document.getElementById('background').getContext('2d');
     //gradient
-    let options =
-        {
-            resolution: 1,
-            gradient:
-                {
-                    resolution: 4,
-                    smallRadius: 0,
-                    hue:
-                        {
-                            min: 0,
-                            max: 360
-                        },
-                    saturation:
-                        {
-                            min: 40,
-                            max: 80
-                        },
-                    lightness:
-                        {
-                            min: 25,
-                            max: 35
-                        }
-                },
-            bokeh:
-                {
-                    count: 30,
-                    size:
-                        {
-                            min: 0.1,
-                            max: 0.3
-                        },
-                    alpha:
-                        {
-                            min: 0.05,
-                            max: 0.4
-                        },
-                    jitter:
-                        {
-                            x: 0.3,
-                            y: 0.3
-                        }
-                },
-            speed:
-                {
-                    min: 0.0001,
-                    max: 0.001
-                },
-            debug:
-                {
-                    strokeBokeh: false,
-                    showFps: false
-                }
-        };
+    let options = {
+        resolution: 1,
+        gradient:
+            {
+                resolution: 4,
+                smallRadius: 0,
+                hue:
+                    {
+                        min: 0,
+                        max: 360
+                    },
+                saturation:
+                    {
+                        min: 40,
+                        max: 80
+                    },
+                lightness:
+                    {
+                        min: 25,
+                        max: 35
+                    }
+            },
+        bokeh:
+            {
+                count: 30,
+                size:
+                    {
+                        min: 0.1,
+                        max: 0.3
+                    },
+                alpha:
+                    {
+                        min: 0.05,
+                        max: 0.4
+                    },
+                jitter:
+                    {
+                        x: 0.3,
+                        y: 0.3
+                    }
+            },
+        speed:
+            {
+                min: 0.0001,
+                max: 0.001
+            },
+        debug:
+            {
+                strokeBokeh: false,
+                showFps: false
+            }
+    };
 
-    let mobile =
-        {
-            force: false,
-            resolution: 0.5,
-            bokeh:
-                {
-                    count: 6
-                }
-        };
+    // Canvas
+    let gradientDesign = document.createElement('canvas').getContext('2d');
+    let circleDesign = document.createElement('canvas').getContext('2d');
 
-    //buffers
-    let gradientBuffer = document.createElement('canvas').getContext('2d');
-    let circleBuffer = document.createElement('canvas').getContext('2d');
     //render time, fps calculations, debug
     let time;
     let targetFps = 60; //not actual fps, but updates per second
@@ -77,10 +67,11 @@ window.addEventListener("load", function() {
     let w = 0;
     let h = 0;
     let scale = 0;
-    //constants for faster calcs
+
+    // Constants for faster calcs
     let pi2 = Math.PI * 2;
 
-    //util functions
+    // Util functions
     function lerp(a, b, step) {
         return step * (b - a) + a;
     }
@@ -103,32 +94,12 @@ window.addEventListener("load", function() {
         );
     }
 
-    function isMobile() {
-        return (
-            mobile.force
-            // Returns the value of the user-agent header sent by the browser to the server.
-            || navigator.userAgent.match(/Android/i)
-            || navigator.userAgent.match(/webOS/i)
-            || navigator.userAgent.match(/iPhone/i)
-            || navigator.userAgent.match(/iPad/i)
-            || navigator.userAgent.match(/iPod/i)
-            || navigator.userAgent.match(/BlackBerry/i)
-            || navigator.userAgent.match(/Windows Phone/i)
-        );
-    }
-
     // Before the next browser refresh, it must perform an animation update,
     window.requestAnimFrame = (function(callback) {
-        if (isMobile())
-            return function(callback) {
-                window.setTimeout(callback, 1000 / 10);
-            };
+        window.setTimeout(callback, 1000 / 60);
         return window.requestAnimationFrame || window.webkitRequestAnimationFrame
-            || window.mozRequestAnimationFrame || window.oRequestAnimationFrame
-            || window.msRequestAnimationFrame || function(callback) {
-                window.setTimeout(callback, 1000 / 60);
-            };
-    })();
+
+    });
 
     //classes
     function Color(h, s, l) {
@@ -161,10 +132,10 @@ window.addEventListener("load", function() {
         new ColorPoint(0, 0, new Color(196, 59, 34)),
         new ColorPoint(0, 1, new Color(269, 79, 32)),
         new ColorPoint(1, 0, new Color(30, 42, 33)),
-        new ColorPoint(1, 1, new Color(304, 47, 27))
+        new ColorPoint(1, 1, new Color(304, 47, 27)),
     ];
 
-    function BokehCircle(x, y, size, alpha) {
+    function Circle(x, y, size, alpha) {
         this.oldX = x;
         this.oldY = y;
         this.oldSize = size;
@@ -174,7 +145,6 @@ window.addEventListener("load", function() {
         this.newAlpha = 0;
         this.newSize = 0;
         this.step = 0;
-        this.speed = 0;
 
         this.x = function() {
             return lerp(this.oldX, this.newX, this.step);
@@ -203,6 +173,7 @@ window.addEventListener("load", function() {
         }));
     }
 
+
     function resize() {
         let width = window.innerWidth;
         let height = window.innerHeight;
@@ -216,41 +187,23 @@ window.addEventListener("load", function() {
         ctx.canvas.height = height;
         ctx.scale(1 / options.resolution, 1 / options.resolution);
 
-        //circle canvas
+        // Canvas circle
         let circleSize = options.bokeh.size.max * scale;
-        circleBuffer.canvas.width = circleSize * 2 + 1;
-        circleBuffer.canvas.height = circleSize * 2 + 1;
+        circleDesign.canvas.width = circleSize * 2 + 1;
+        circleDesign.canvas.height = circleSize * 2 + 1;
 
-        circleBuffer.fillStyle = "rgb(255, 255, 255)";
-        circleBuffer.beginPath();
-        circleBuffer.arc(circleSize, circleSize, circleSize, 0, pi2);
-        circleBuffer.closePath();
-        circleBuffer.fill();
+        circleDesign.fillStyle = "rgb(255, 255, 255)";
+        circleDesign.beginPath();
+        circleDesign.arc(circleSize, circleSize, circleSize, 0, pi2);
+        circleDesign.closePath();
+        circleDesign.fill();
 
-        //force render on mobile
-        if (isMobile())
-            render();
-    }
-
-    function softCopy(src, dest) {
-        let i = 0;
-
-        for (let property in src)
-        {
-            if (dest.hasOwnProperty(property))
-                if (softCopy(src[property], dest[property]) === 0)
-                    dest[property] = src[property];
-            i++;
-        }
-        return i;
+        render();
     }
 
     function init() {
-        gradientBuffer.canvas.height = options.gradient.resolution;
-        gradientBuffer.canvas.width = options.gradient.resolution;
-
-        if (isMobile())
-            softCopy(mobile, options);
+        gradientDesign.canvas.height = options.gradient.resolution;
+        gradientDesign.canvas.width = options.gradient.resolution;
 
         resize();
 
@@ -261,7 +214,7 @@ window.addEventListener("load", function() {
         });
 
         for(let i = 0; i < options.bokeh.count; i++) {
-            circles.push(new BokehCircle(Math.random(), Math.random(),
+            circles.push(new Circle(Math.random(), Math.random(),
                 rand(options.bokeh.size), rand(options.bokeh.alpha)));
             circles[i].newAlpha = rand(options.bokeh.alpha);
             circles[i].newSize = rand(options.bokeh.size);
@@ -319,26 +272,26 @@ window.addEventListener("load", function() {
     function render() {
         iterate();
 
-        //draw point gradient to buffer
+        // Draw point gradient to canvas(gradientDesgin)
         colorPoints.forEach(function(point) {
             let x = point.x * options.gradient.resolution;
             let y = point.y * options.gradient.resolution;
-            let grad = gradientBuffer.createRadialGradient(x, y,
+            let grad = gradientDesign.createRadialGradient(x, y,
                 options.gradient.smallRadius, x, y,
                 options.gradient.resolution);
             grad.addColorStop(0, 'hsla(' + point.color().str() + ', 255)');
             grad.addColorStop(1, 'hsla(' + point.color().str() + ', 0)');
 
-            gradientBuffer.fillStyle = grad;
-            gradientBuffer.fillRect(0, 0,
+            gradientDesign.fillStyle = grad;
+            gradientDesign.fillRect(0, 0,
                 options.gradient.resolution, options.gradient.resolution);
         });
 
-        //draw gradient from memory
+        // Draw gradient from memory
         ctx.globalCompositeOperation = "source-over";
-        ctx.drawImage(gradientBuffer.canvas, 0, 0, w, h);
+        ctx.drawImage(gradientDesign.canvas, 0, 0, w, h);
 
-        //draw bokeh
+        // Draw bokeh
         ctx.globalCompositeOperation = "overlay";
         if (options.debug.strokeBokeh)
             ctx.strokeStyle = "yellow";
@@ -347,7 +300,7 @@ window.addEventListener("load", function() {
             let size = circle.size() * scale;
 
             ctx.globalAlpha = circle.alpha();
-            ctx.drawImage(circleBuffer.canvas,
+            ctx.drawImage(circleDesign.canvas,
                 circle.x() * w - size / 2, circle.y() * h - size / 2,
                 size, size);
 
@@ -362,23 +315,13 @@ window.addEventListener("load", function() {
 
         ctx.globalAlpha = 1;
 
-        //debug info
-        if (options.debug.showFps) {
-            if(fps <= 10) ctx.fillStyle = 'red';
-            else ctx.fillStyle = 'yellow';
-
-            ctx.font = "20px sans-serif";
-            ctx.fillText(Math.round(fps) + " fps", 10, 20);
-        }
-
-        //done rendering, wait for frame
+        // Move the circles
         window.requestAnimFrame(render);
     }
 
-    //does not seem to impact performance
+    // Resize for the little screen
     window.addEventListener("resize", resize);
-
-    //init and render :)
     init();
     render();
+
 });
