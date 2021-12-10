@@ -1,5 +1,5 @@
-window.addEventListener("load", function() {
-    const ctx = document.getElementById('background').getContext('2d');
+  window.addEventListener("load", function() {
+    const ctx = document.getElementById('bubbleCanvas').getContext('2d');
     //gradient
     let options = {
         resolution: 1,
@@ -326,3 +326,4 @@ window.addEventListener("load", function() {
     render();
 
 });
+

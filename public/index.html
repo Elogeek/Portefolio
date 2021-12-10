@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="/assets/css/menu.css">
 </head>
 <body>
-<!-- Design (background) of the site-->
-<canvas id="background"></canvas>
+    <!-- Design (background) of the site-->
+    <canvas id="bubbleCanvas"></canvas>
 
 <header>
     <a href="index.html" class="home">Elogeek</a>
@@ -42,7 +42,31 @@
     </div>
 </div>
 
-<script src="/assets/js/composants/background.js"></script>
+    <div class="baseline reveal">
+        <span class="baseline-welcome reveal-1">welcome</span>
+        <span class="baseline-name reveal-2">Portfolio</span>
+        <span class="baseline-slogan reveal-3">d'Elodie</span>
+    </div>
+    <section class="home-section">
+        <div class="little-container reveal">
+            <div class="block block-left">
+                <img class="block-img reveal-1" src="/assets/img/me.png" alt="img me">
+            </div>
+            <div class="block-body">
+                <h2 class="title reveal-2">Qui suis- je?</h2>
+                <span>Développeuse web & web mobile</span>
+                <p class="reveal-3">
+                    Je m'appelle Elodie. J'ai bientôt 30 ans.
+                </p>
+                <div class="more reveal-4">
+                    <a href="/public/aboutMe.html">
+                        see more
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+<script src="/assets/js/composants/bubbleCanvas.js"></script>
 <script src="/assets/main.js"></script>
 
 </body>

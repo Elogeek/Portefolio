@@ -30,9 +30,39 @@ function hiddenMenu() {
 open.addEventListener("click",showMenu);
 closed.addEventListener('click', hiddenMenu);
 
+/* Animation text and img home .reveal */
+const ratio = .1;
+
+const options = {
+    root:null,
+    rootMargin: '0px',
+    threshold: ratio
+}
+
+const handleIntersect = function(entries, observer) {
+    entries.forEach(function(entry) {
+        // if visible
+        if(entry.intersectionRatio > ratio) {
+            entry.target.classList.remove('reveal');
+            observer.unobserve(entry.target)
+        }
+
+    })
+}
+
+// Permet de voir quand les fichiers (reveal) sont chargées
+document.documentElement.classList.add('reveal-loaded');
+
+window.addEventListener('DOMContentLoaded', function() {
+    const observer = new IntersectionObserver(handleIntersect,options);
+    // Détecte la collision entre l'élément et la zone d'affichage
+    document.querySelectorAll('.reveal').forEach(function (r){
+        observer.observe(r)
+    })
+});
+
 
 /* Animation aboutMe */
-
 let selectTongue  = document.querySelector("#tongue-select");
 let p = document.querySelector("#pDescription");
 let p2 = document.querySelector("#pDescription2");
@@ -42,6 +72,7 @@ let titleDescription = document.querySelector("#title");
  * Switch the language according to the language chosen by the user in the select
  * @constructor
  */
+
 function ChooseTongue() {
 
     if(selectTongue.value === "english") {

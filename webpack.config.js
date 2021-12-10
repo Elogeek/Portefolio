@@ -6,7 +6,7 @@ module.exports = (env, argv) => {
     return {
         entry: {
             main: "./assets/main.js",
-            background: "./assets/js/background.js",
+            background: "./assets/js/bubbleCanvas.js",
             menu: "./assets/js/Menu.js",
         },
 

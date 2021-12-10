@@ -15,7 +15,8 @@ body {
     display: flex;
 }
 
-#background {
+/* Design background */
+#bubbleCanvas {
     position: fixed;
     top: 0;
     left: 0;
@@ -23,7 +24,7 @@ body {
 
 /* Design main menu */
 header {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -53,6 +54,10 @@ header .icons {
     font-size: 3rem;
 }
 
+.icons #exitMenu {
+    display: none;
+}
+
 header .iconMenu {
     width: 32px;
     height: 22px;
@@ -62,7 +67,7 @@ header .iconMenu {
  .menu {
     width: 100%;
     text-align: center;
-    margin-top: 6rem;
+    margin-top: 10rem;
     display: block;
     height: 0;
     position: absolute;
@@ -83,6 +88,7 @@ header li, header a {
     text-decoration-line: none;
     font-size: 8rem;
 }
+
 .menu-list a:hover,#socialMenu i:hover {
   color: #C8A1D0;
 }
@@ -91,6 +97,29 @@ header li, header a {
     justify-content: center;
     flex-direction: row;
     display: flex;
+}
+
+/* Design animation img and .baseline */
+.reveal-loaded .reveal [class*="reveal-"] {
+    opacity: 0!important;
+    transform: translateY(30px)!important;
+    transition: 0s!important;
+}
+
+.reveal-loaded [class*="reveal-"] {
+    transition: 1s cubic-bezier(.5,0,0,1);
+}
+
+.reveal-loaded .reveal-2 {
+    transition-delay: .1s ;
+}
+
+.reveal-loaded .reveal-3 {
+    transition-delay: .2s ;
+}
+
+.reveal-loaded  .reveal-4 {
+    transition-delay: .3s ;
 }
 
 /* Design pages aboutMe, works */
@@ -190,6 +219,29 @@ header li, header a {
 }
 
 /* Responsive mode */
+
+/* Design animation img and .baseline for users who do not want animation */
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal [class*="reveal-"] {
+        opacity: 1!important;
+        transform: translateY(0px)!important;
+    }
+
+    [class*="reveal-"] {
+        transition-duration: 0s!important;
+        transition-delay: 0s!important;
+    }
+
+}
+
+@media screen and (max-width: 1600px) {
+
+    .menu {
+        margin-top: 1rem;
+    }
+}
+
 @media screen and (max-width: 1300px) {
 
     .menu-list li {

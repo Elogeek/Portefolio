@@ -8,6 +8,6 @@ require_once "include.php";
     <canvas id="background"></canvas>
 </body>
 
-    <script src="/assets/js/composants/background.js"></script>
+    <script src="/assets/js/composants/bubbleCanvas.js"></script>
 
 
