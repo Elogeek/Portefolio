@@ -1,128 +1,54 @@
-<!DOCTYPE html>
+<?php
+require_once "include.php";
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Title</title>
     <title>Portfolio Elogeek</title>
     <script src="https://kit.fontawesome.com/e3ddf954eb.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/assets/css/menu.css">
 </head>
 <body>
+<!-- Design (background) of the site-->
+<canvas id="background"></canvas>
 
-    <!-- Design (background) of the site-->
-    <canvas id="background"></canvas>
-
-    <header>
-        <a href="index.html" class="home">Elogeek</a>
-            <div id="top">
-                <div class="icons">
-                   <div class="iconMenu"><i id="openMenu" class="fas fa-bars"></i></div>
-                   <div class="iconMenu"><i id="exitMenu" class="fas fa-times-circle"></i></div>
-                </div>
-
-                <div class="menu">
-                    <ul class="menu-list">
-                        <li><a href="index.html" title="Home">Home</a></li>
-                        <li><a href="#works" title="Works" >Works</a></li>
-                        <li><a href="#aboutMe" title="About me">About me</a></li>
-                        <li><a href="mailto:elodiechristin@gmail.com" title="Contact" target="_blank">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-    </header>
-
-    <div class="container">
-        <h2>A propros de moi</h2>
-        <div id="aboutMe">
-
-            <div id="imgTop">
-
-                <img src="" alt="my avatar">
-                <div id="chooseL">
-                    <label for="tongue-select"> Langue</label>
-                    <select name="tongue" id="tongue-select">
-                        <option value="">--Choisi une langue--</option>
-                        <option value="fr">français</option>
-                        <option value="english">anglais</option>
-                        <option value="japanese">japonais</option>
-                    </select>
-                </div>
-
-            </div>
-            <p id="pDescription">
-                Je suis une développeuse web & web mobile junior.
-                Actuellement en formation chez <a href="https://www.up-to.fr/" target="_blank"> UPTO.</a>
-                Je recherche un stage de trois mois pour m'améliorer en informatique.
-            </p>
-
-            <h2 id="title">Mes loisirs</h2>
-            <div id="pDescription2">
-                <p>
-                    J'adore le Japon et sa culture geek.
-                    J'aime la nature, la musique métal,la cuisine et surtout la pâtisserie.
-                    J'adore construire un site de A à Z et le designer.
-                </p>
-            </div>
-
+<header>
+    <a href="index.html" class="home">Elogeek</a>
+    <div id="top">
+        <div class="icons">
+            <div class="iconMenu"><i id="openMenu" class="fas fa-bars"></i></div>
+            <div class="iconMenu"><i id="exitMenu" class="fas fa-times-circle"></i></div>
         </div>
 
-        <!--div id="works">
-
-            <h2>Mes travaux</h2>
-
-            <div>
-                <div>
-                    <p>
-                        J'ai crée mon site de cuisine. C'est un challenge personnel.
-                    </p>
-                    <h3>Le logo</h3>
-                    <!--img logo ZEN cook-->
-                    <h3>L'acceuil du site</h3>
-                    <!--ing home zencook-->
-                    <p>
-                        Si ce site vous intéresse, n'hésitez pas à le visiter : <a href="#" title="Zencook"> ZenCook ! </a>
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        J'ai réalisé un site hôtelier. C'est aussi un autre projet personnel,
-                        afin de progresser dans mon domaine .
-                    </p>
-                    <h3>Le logo</h3>
-                    <!--img logo site-->
-                    <h3>L'acceuil du site</h3>
-                    <!--ing home site-->
-                    <p>
-                        Si ce site vous intéresse, jette y un oeil  mais pas trop loin XD : <a href="#" title="Zencook"> ... ! </a>
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        Voici un autre projet personnel. C'est un site de petits jeux pour enfants.
-                    </p>
-                    <h3>Le logo</h3>
-                    <!--img logo site-->
-                    <h3>L'acceuil du site</h3>
-                    <!--ing home site-->
-                    <p>
-                        Si ce site vous intéresse : <a href="#" title="Zencook"> FunGames ! </a>
-                    </p>
-                </div>
-            </div>
-        </div-->
-
-        <!-- Social networks menu-->
-        <div id="socialMenu">
-            <ul class="socialLinks">
-                <li><a href="https://www.facebook.com/profile.php?id=100075598280559" title="facebook" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
-                <li><a href="#" title="linkedin" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="https://github.com/Elogeek" target="_blank"><i class="fab fa-github-square"></i></a></li>
-                <li><a href="mailto:elodiechristin@gmail.com" title="contact" target="_blank"><i class="fas fa-envelope-square"></i></a></li>
+        <div class="menu">
+            <ul class="menu-list">
+                <li><a href="index.html" title="Home">Home</a></li>
+                <li><a href="works.html" title="Works">Works</a></li>
+                <li><a href="aboutMe.html" title="About me">About me</a></li>
+                <li><a href="mailto:elodiechristin@gmail.com" title="Contact" target="_blank">Contact</a></li>
             </ul>
         </div>
     </div>
+</header>
+<div class="container">
 
-    <script src="/assets/js/composants/Menu.js"></script>
-    <script src="/assets/js/composants/background.js"></script>
-    <script src="/assets/main.js"></script>
+    <!-- Social networks menu-->
+    <div id="socialMenu">
+        <ul class="socialLinks">
+            <li><a href="#" title="facebook" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+            <li><a href="#" title="linkedin" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+            <li><a href="https://github.com/Elogeek" target="_blank"><i class="fab fa-github-square"></i></a></li>
+            <li><a href="mailto:elodiechristin@gmail.com" title="contact" target="_blank"><i class="fas fa-envelope-square"></i></a></li>
+        </ul>
+    </div>
+</div>
+
+<script src="/assets/js/composants/background.js"></script>
+<script src="/assets/main.js"></script>
+
 </body>
 </html>
+
+
+

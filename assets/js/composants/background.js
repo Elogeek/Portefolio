@@ -68,11 +68,10 @@ window.addEventListener("load", function() {
     let h = 0;
     let scale = 0;
 
-    // Constants for faster calcs
+    // To go faster
     let pi2 = Math.PI * 2;
 
-    // Util functions
-    function lerp(a, b, step) {
+    function leap(a, b, step) {
         return step * (b - a) + a;
     }
 
@@ -82,10 +81,12 @@ window.addEventListener("load", function() {
         return a;
     }
 
+    // For to have a number random
     function rand(obj) {
         return Math.random() * (obj.max - obj.min) + obj.min;
     }
 
+    // For to have a new color
     function newColor() {
         return new Color(
             rand(options.gradient.hue),
@@ -94,7 +95,7 @@ window.addEventListener("load", function() {
         );
     }
 
-    // Before the next browser refresh, it must perform an animation update,
+    // Before the next browser refresh, it must perform an animation update
     window.requestAnimFrame = (function(callback) {
         window.setTimeout(callback, 1000 / 60);
         return window.requestAnimationFrame || window.webkitRequestAnimationFrame
@@ -121,9 +122,9 @@ window.addEventListener("load", function() {
         this.speed = 0;
 
         this.color = function() {
-            return new Color(lerp(this.oldColor.h, this.newColor.h, this.step),
-                lerp(this.oldColor.s, this.newColor.s, this.step),
-                lerp(this.oldColor.l, this.newColor.l, this.step));
+            return new Color(leap(this.oldColor.h, this.newColor.h, this.step),
+                leap(this.oldColor.s, this.newColor.s, this.step),
+                leap(this.oldColor.l, this.newColor.l, this.step));
         }
 
     }
@@ -147,16 +148,16 @@ window.addEventListener("load", function() {
         this.step = 0;
 
         this.x = function() {
-            return lerp(this.oldX, this.newX, this.step);
+            return leap(this.oldX, this.newX, this.step);
         }
         this.y = function() {
-            return lerp(this.oldY, this.newY, this.step);
+            return leap(this.oldY, this.newY, this.step);
         }
         this.alpha = function() {
-            return lerp(this.oldAlpha, this.newAlpha, this.step);
+            return leap(this.oldAlpha, this.newAlpha, this.step);
         }
         this.size = function() {
-            return lerp(this.oldSize, this.newSize, this.step);
+            return leap(this.oldSize, this.newSize, this.step);
         }
     }
 
@@ -291,7 +292,7 @@ window.addEventListener("load", function() {
         ctx.globalCompositeOperation = "source-over";
         ctx.drawImage(gradientDesign.canvas, 0, 0, w, h);
 
-        // Draw bokeh
+        // Draw bokeh(==tampon)
         ctx.globalCompositeOperation = "overlay";
         if (options.debug.strokeBokeh)
             ctx.strokeStyle = "yellow";

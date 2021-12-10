@@ -68,23 +68,5 @@ const linksMenu = [
 const a = new Menu(myMenu,linksMenu);
 */
 
-// Dynamics : show and hide the menu
-let btnOpenMenu = document.getElementById("openMenu");
-let btnExitMenu = document.getElementById("exitMenu");
-let liMenu = document.querySelector(".menu");
 
-btnOpenMenu.addEventListener("click", startAnimation);
-btnExitMenu.addEventListener("click", stopAnimation);
-
-function startAnimation(){
-    liMenu.style.display = "flex";
-    btnOpenMenu.style.display = "none";
-    btnExitMenu.style.display = "flex";
-}
-
-function stopAnimation() {
-    btnExitMenu.style.display = "none";
-    liMenu.style.display = "none";
-    btnOpenMenu.style.display = "flex";
-}
 
