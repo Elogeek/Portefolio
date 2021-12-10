@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <title>Portfolio Elogeek</title>
-    <script src="https://kit.fontawesome.com/e3ddf954eb.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/assets/css/menu.css">
-</head>
-<body>
-<!-- Design (background) of the site-->
-<canvas id="background"></canvas>
+<?php
+require_once "view/_partials/base.view.php";
+?>
 
 <header>
-    <a href="index.html" class="home">Elogeek</a>
+    <a href="public/index.html" class="home">Elogeek</a>
     <div id="top">
         <div class="icons">
             <div class="iconMenu"><i id="openMenu" class="fas fa-bars"></i></div>
@@ -21,9 +12,9 @@
 
         <div class="menu">
             <ul class="menu-list">
-                <li><a href="index.html" title="Home">Home</a></li>
-                <li><a href="works.html" title="Works">Works</a></li>
-                <li><a href="aboutMe.html" title="About me">About me</a></li>
+                <li><a href="public/index.html" title="Home">Home</a></li>
+                <li><a href="public/works.html" title="Works">Works</a></li>
+                <li><a href="public/aboutMe.html" title="About me">About me</a></li>
                 <li><a href="mailto:elodiechristin@gmail.com" title="Contact" target="_blank">Contact</a></li>
             </ul>
         </div>
@@ -41,12 +32,3 @@
         </ul>
     </div>
 </div>
-
-<script src="/assets/js/composants/background.js"></script>
-<script src="/assets/main.js"></script>
-
-</body>
-</html>
-
-
-

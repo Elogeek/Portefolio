@@ -26,11 +26,12 @@ function hiddenMenu() {
     menu.style.display = "none";
     open.style.display = "flex";
 }
+
 open.addEventListener("click",showMenu);
 closed.addEventListener('click', hiddenMenu);
 
 
-/* Animation aboutMe
+/* Animation aboutMe */
 
 let selectTongue  = document.querySelector("#tongue-select");
 let p = document.querySelector("#pDescription");
@@ -40,7 +41,7 @@ let titleDescription = document.querySelector("#title");
 /**
  * Switch the language according to the language chosen by the user in the select
  * @constructor
-
+ */
 function ChooseTongue() {
 
     if(selectTongue.value === "english") {
@@ -78,4 +79,3 @@ function ChooseTongue() {
 
 selectTongue.addEventListener('click', ChooseTongue)
 
- */
